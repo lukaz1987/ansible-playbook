@@ -1,0 +1,32 @@
+---
+- hosts: serwer_debian
+  become: yes
+  tasks:
+    - name: copy config rc-local.service
+      copy:
+        #src: ~/ansible_rc_local_enable_debian/rc-local.service
+        src: ~/Dane/Programy/ansible/ansible_rc_local_enable_debian/rc-local.service
+        dest: /etc/systemd/system/
+        remote_src: no
+        owner: root
+        group: root
+        mode: '0644'
+        #backup: yes
+
+    - name: copy config rc.local
+      copy:
+        #src: ~/ansible_rc_local_enable_debian/rc.local
+        src: ~/Dane/Programy/ansible/ansible_rc_local_enable_debian/rc.local
+        dest: /etc/
+        remote_src: no
+        owner: root
+        group: root
+        mode: '0744'
+        #backup: yes
+
+    - name: systemctl enable rc-local
+      shell: systemctl enable rc-local
+
+
+    - name: service rc-local restart
+      shell: service rc-local restart
