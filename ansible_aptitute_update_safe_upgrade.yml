@@ -1,0 +1,18 @@
+---
+- hosts: serwer_debian
+  become: yes
+  tasks:
+    - name: Aktualizacja repozytorium
+      apt:
+        update_cache: yes
+        force_apt_get: yes
+
+    - name: Aktualizacja pakietow (aptitude safe-upgrade)
+      apt:
+        upgrade: safe
+        force_apt_get: yes
+
+    - name: Czyszczenie (autoclean, autoremove)
+      apt: 
+        autoclean: yes
+        autoremove: yes
