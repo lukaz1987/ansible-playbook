@@ -1,0 +1,16 @@
+- hosts: serwer_debian
+  become: yes
+  tasks:
+
+  - name: Copy new version VSCodium
+    ansible.builtin.copy:
+      src: /tmp/1.gz
+      dest: /tmp/vscodium.tar.gz
+      owner: lukasz
+      group: lukasz
+  
+  - name: Extract vscodium.tar.gz
+    ansible.builtin.shell: tar -xvzf /tmp/vscodium.tar.gz -C /usr/share/codium/
+
+  - name: chown lukasz:lukasz /usr/share/codium/
+    ansible.builtin.shell: chown lukasz:lukasz /usr/share/codium/ -R 
